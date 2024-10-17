@@ -1,7 +1,7 @@
 #include <ostream>
 #include "List.h"
 template <typename T> 
-class ListArray : public List<T> {
+class ListArray {
     private:
     T* arr;
 	int max;
@@ -56,7 +56,7 @@ class ListArray : public List<T> {
         }
 
         if (n == max) {
-            resize(max +1); 
+            resize(max * 2); 
         }
 
         for (int i = n; i > pos; --i) {
@@ -89,14 +89,14 @@ class ListArray : public List<T> {
     }
     
     T get(int pos) override {
-        if (pos < 0 || pos >= size()-1) {
+        if (pos < 0 || pos >= n) {
             throw std::out_of_range("Posición inválida");
         }
         return arr[pos];
     }
    
     int search(T e) override {
-        for (int i = 0; i < size(); ++i) {
+        for (int i = 0; i < n; ++i) {
             if (arr[i] == e) {
                 return i;
             }
@@ -104,11 +104,7 @@ class ListArray : public List<T> {
         return -1; 
     }
     bool empty() override {
-        if (n == 0) {
-            return true;
-        }else{
-            return false;
-        }
+        return n == 0;
     }
     
  
